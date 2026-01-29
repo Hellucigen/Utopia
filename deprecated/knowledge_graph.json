@@ -1,0 +1,500 @@
+{
+    "nodes": [
+        {
+            "id": "Concept_Me_1768236261",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Me",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236261,
+                "last_accessed": 1768236261
+            }
+        },
+        {
+            "id": "Concept_Haru_1768236333",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Haru",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236333,
+                "last_accessed": 1768236333
+            }
+        },
+        {
+            "id": "Concept_Name_1768236346",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Name",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236346,
+                "last_accessed": 1768236346
+            }
+        },
+        {
+            "id": "Concept_What_1768236471",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "What",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236471,
+                "last_accessed": 1768236471
+            }
+        },
+        {
+            "id": "Concept_AGI_1768236489",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "AGI",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236489,
+                "last_accessed": 1768236489
+            }
+        },
+        {
+            "id": "Concept_Ask_1768237000",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Ask",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768237000,
+                "last_accessed": 1768237000
+            }
+        },
+        {
+            "id": "Action_Answer_1768238751",
+            "type": "Action",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Answer",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768238751,
+                "last_accessed": 1768238751,
+                "code": "if am.activations:\n    max_node_id = max(am.activations, key=am.activations.get)\n    node = graph.nodes[max_node_id]\n    name = node.attributes.get('name', max_node_id)\n    print(f'{name}')\nelse:\n    print('当前无激活节点')"
+            }
+        },
+        {
+            "id": "Concept_You_1768239493",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "You",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768239493,
+                "last_accessed": 1768239493
+            }
+        },
+        {
+            "id": "Concept_Your_1768239504",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Your",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768239504,
+                "last_accessed": 1768239504
+            }
+        },
+        {
+            "id": "Concept_Unknown_Knowledge_1768633426",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Unknown_Knowledge",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768633426,
+                "last_accessed": 1768633426
+            }
+        },
+        {
+            "id": "Action_CreateUnknownNode_1768633462",
+            "type": "Action",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "CreateUnknownNode",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768633462,
+                "last_accessed": 1768633462,
+                "code": "keywords = extract_keywords(text)\nfor kw in keywords:\n    name_lower = kw.lower()\n    matched = False\n    for node_id, node in graph.nodes.items():\n        if node.attributes.get('name', '').lower() == name_lower:\n            matched = True\n            break\n    if not matched:\n        current_ts = int(time.time())\n        node_id = f'Concept_{kw.capitalize()}_{current_ts}'\n        new_node = Node(node_id=node_id, node_type='Concept', base_weight=0.5, memory_type='semantic')\n        new_node.attributes = {\n            'name': kw.capitalize(),\n            'weight': 0.5,\n            'memory_type': 'semantic',\n            'created_at': current_ts,\n            'last_accessed': current_ts\n        }\n        graph.add_node(new_node)\n        graph.save_to_json('knowledge_graph.json')\n        print(f'✅ 创建新节点: [Concept] {kw.capitalize()}')\n        am.activate(node_id, 1.0, source='auto_created')"
+            }
+        },
+        {
+            "id": "Concept_Byebye_1769338201",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Byebye",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769338201,
+                "last_accessed": 1769338201
+            }
+        },
+        {
+            "id": "Action_SearchFormWiki_1769340808",
+            "type": "Action",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "SearchFormWiki",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1769340808,
+                "last_accessed": 1769340808,
+                "code": "wiki_enricher.py"
+            }
+        },
+        {
+            "id": "Concept_Hi_1769341526",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Hi",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769341526,
+                "last_accessed": 1769341526
+            }
+        },
+        {
+            "id": "Concept_Hello_1769341741",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Hello",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769341741,
+                "last_accessed": 1769341741
+            }
+        },
+        {
+            "id": "Concept_Apple_1769343173",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Apple",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343173,
+                "last_accessed": 1769343173
+            }
+        },
+        {
+            "id": "Concept_Fruit_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Fruit",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Appletree_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Appletree",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Centralasia_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Centralasia",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Malussieversii_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Malus sieversii",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Eurasia_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Eurasia",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Northamerica_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "North america",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Mythology_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Mythology",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Religion_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Religion",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Domesticapple_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Domestic apple",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Tree_1769343244_0",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Tree",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Search_1769692199",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Search",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769692199,
+                "last_accessed": 1769692199
+            }
+        },
+        {
+            "id": "Concept_Transitive_Verb_1769694640",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Transitive_Verb",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1769694640,
+                "last_accessed": 1769694640
+            }
+        },
+        {
+            "id": "Concept_Object_1769694993",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Object",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1769694993,
+                "last_accessed": 1769694993
+            }
+        }
+    ],
+    "edges": [
+        {
+            "src": "Concept_Me_1768236261",
+            "dst": "Concept_AGI_1768236489",
+            "relation": "IDENTITY_IS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Me_1768236261",
+            "dst": "Concept_Haru_1768236333",
+            "relation": "NAME_IS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_What_1768236471",
+            "dst": "Concept_Ask_1768237000",
+            "relation": "USED_TO",
+            "weight": 0.5
+        },
+        {
+            "src": "Concept_Name_1768236346",
+            "dst": "Concept_Haru_1768236333",
+            "relation": "FOR_ME",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Ask_1768237000",
+            "dst": "Action_Answer_1768238751",
+            "relation": "SHOULD",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_You_1768239493",
+            "dst": "Concept_Me_1768236261",
+            "relation": "FORMS_DEICTIC_PAIR_WITH",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Your_1768239504",
+            "dst": "Concept_You_1768239493",
+            "relation": "ADJECTIVAL_POSSESSIVE_FORM_FOR",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_Knowledge_1768633426",
+            "dst": "Action_CreateUnknownNode_1768633462",
+            "relation": "THEN",
+            "weight": 1.0
+        },
+        {
+            "src": "Action_CreateUnknownNode_1768633462",
+            "dst": "Action_SearchFormWiki_1769340808",
+            "relation": "THEN_SHOULD",
+            "weight": 1.0
+        },
+        {
+            "src": "Concept_Apple_1769343173",
+            "dst": "Concept_Fruit_1769343244_0",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Apple_1769343173",
+            "dst": "Concept_Eurasia_1769343244_0",
+            "relation": "CULTIVATED_IN",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Apple_1769343173",
+            "dst": "Concept_Northamerica_1769343244_0",
+            "relation": "INTRODUCED_TO",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Apple_1769343173",
+            "dst": "Concept_Mythology_1769343244_0",
+            "relation": "CULTURAL_SIGNIFICANCE",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Apple_1769343173",
+            "dst": "Concept_Religion_1769343244_0",
+            "relation": "CULTURAL_SIGNIFICANCE",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Appletree_1769343244_0",
+            "dst": "Concept_Centralasia_1769343244_0",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Appletree_1769343244_0",
+            "dst": "Concept_Malussieversii_1769343244_0",
+            "relation": "ANCESTOR_OF",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Domesticapple_1769343244_0",
+            "dst": "Concept_Tree_1769343244_0",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Search_1769692199",
+            "dst": "Concept_Transitive_Verb_1769694640",
+            "relation": "IS",
+            "weight": 0.5
+        },
+        {
+            "src": "Concept_Search_1769692199",
+            "dst": "Action_SearchFormWiki_1769340808",
+            "relation": "CAN",
+            "weight": 0.9
+        }
+    ]
+}
