@@ -16,7 +16,7 @@ visualize_kg.py(It feels really messy... and when there are too many nodes, the 
 
 <img width="1551" height="999" alt="QQ_1769697684503" src="https://github.com/user-attachments/assets/65d6716e-c9b0-4f5a-9744-b7538dda2a62" />
 
-memory_graph_builder.py:An interactive knowledge graph tool—nothing much to show right.
+memory_graph_builder.py:  An interactive knowledge graph tool—nothing much to show right.
 
 
 In short, the system is still very rough at this stage, but I personally feel it has a bit of potential. However, after building it all by myself up to now, I’m feeling extremely exhausted—both mentally and physically—and running low on inspiration. Maybe I need collaboration with others… though at the same time, there’s something really cool about slowly building a system entirely on my own.
