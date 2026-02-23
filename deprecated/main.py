@@ -1,98 +1,146 @@
-# main.py
-# Updated with unified classes.
-# Uses am.get_source_path_with_relations.
-
+# main.py (GUI version with Tkinter, full modified version with immediate refresh)
+from utils import normalize_concept, generate_node_id
+import threading
+import time
+import sys
+import queue  # For thread-safe communication
+import tkinter as tk
+from tkinter import scrolledtext
 from attention_framework import AttentionFramework
-from action_executor import ActionExecutor
-from nl_driven_activation import extract_keywords
-import logging
 
-logging.basicConfig(level=logging.INFO)
+# 全局标志位，控制线程退出
+RUNNING = True
 
-def format_node_name(graph, node_id):
-    if node_id in ("input", "natural_language"):
-        return "User Input"
-    node = graph.get_node(node_id)
-    if node is None:
-        return f"[Unknown]{node_id}"
-    name = node.attributes.get("name", node_id)
-    return f"[{node.type}] {name}"
 
-def format_chain_with_relations(graph, path_with_rels):
-    parts = []
-    for i, (node_id, rel) in enumerate(path_with_rels):
-        node_str = format_node_name(graph, node_id)
-        if i == 0:
-            parts.append(node_str)
+def cognitive_heartbeat(af, update_queue):
+    """
+    后台认知线程：模拟大脑的实时运作。
+    将状态更新放入队列，由主线程处理UI更新。
+    """
+    global RUNNING
+
+    while RUNNING:
+        time.sleep(1.0)  # 模拟 1 秒的时间流逝
+
+        # --- 1. 执行认知步 (扩散 & 衰减 & 模式回归) ---
+        af.step()
+
+        # --- 2. DMN 游荡逻辑 ---
+        drift_msg = None
+        if af.am.lambda_mode < 0.4:
+            drift_msg = af.am.drift()
+
+        # --- 3. 获取当前状态 ---
+        mode_val = af.am.lambda_mode
+        mode_str = "🔥 CEN (专注)" if mode_val > 0.5 else "💤 DMN (游荡)"
+
+        top_node_id = af.am.get_top_node()
+        focus_name = "无"
+        if top_node_id:
+            node = af.graph.get_node(top_node_id)
+            focus_name = node.attributes.get("name", top_node_id)
+            activation = af.am.get_activation(top_node_id)
+            focus_str = f"{focus_name} ({activation:.2f})"
         else:
-            parts.append(f" --[{rel}]→ {node_str}")
-    return "".join(parts)
+            focus_str = "放空"
 
-def main():
+        # --- 4. 准备状态行并放入队列 ---
+        status_line = f"[状态] {mode_str} | 🧠 焦点: {focus_str}"
+        if drift_msg:
+            status_line += f" | {drift_msg}"
+        update_queue.put(status_line + "\n")
+
+
+def main_gui():
+    global RUNNING
+
+    # 初始化认知架构
     af = AttentionFramework()
-    executor = ActionExecutor(af.graph, af.am)
 
-    while True:
-        user_input = input("\n🗣️ > ").strip()
-        if user_input.lower() in {"quit", "exit", "q"}:
-            break
-        if not user_input:
-            continue
+    # 创建队列用于线程通信
+    update_queue = queue.Queue()
 
-        af.inject_text(user_input, keyword_extractor_func=extract_keywords)
+    # 启动后台认知线程
+    t = threading.Thread(target=cognitive_heartbeat, args=(af, update_queue), daemon=True)
+    t.start()
 
-        prev_foa = None
-        stable_count = 0
-        max_stable = 2
-        max_rounds = 6
+    # 创建Tkinter GUI
+    root = tk.Tk()
+    root.title("Haru 认知系统 (实时版)")
+    root.geometry("600x400")
 
-        for round_num in range(max_rounds):
-            foa = af.step()
-            if foa == prev_foa:
-                stable_count += 1
-            else:
-                stable_count = 0
-            prev_foa = foa
+    # 上部：状态显示区（滚动文本框）
+    status_label = tk.Label(root, text="系统状态（思维过程）：")
+    status_label.pack(anchor="w", padx=10, pady=5)
 
-            if stable_count >= max_stable:
-                executor.execute_pending_actions(current_focus=foa, current_text=user_input)
-                break
+    status_text = scrolledtext.ScrolledText(root, height=15, wrap=tk.WORD, state='normal')
+    status_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
 
-            if round_num == max_rounds - 1:
-                executor.execute_pending_actions(current_focus=foa, current_text=user_input)
+    # 下部：输入区
+    input_frame = tk.Frame(root)
+    input_frame.pack(fill=tk.X, padx=10, pady=10)
 
-        # Build chains
-        chains = []
+    input_label = tk.Label(input_frame, text="🗣️ 输入：")
+    input_label.pack(side=tk.LEFT)
 
-        # FoA chain
-        if foa and af.graph.get_node(foa).type != "Action":
-            foa_path = af.am.get_source_path_with_relations(foa)
-            foa_chain = format_chain_with_relations(af.graph, foa_path)
-            chains.append(f"🎯 FoA: {foa_chain}")
+    entry = tk.Entry(input_frame)
+    entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        # Action chains
-        action_entries = []
-        for node_id, node in af.graph.nodes.items():
-            if node.type == "Action":
-                act_val = af.am.get_activation(node_id)
-                if act_val >= executor.threshold:
-                    path = af.am.get_source_path_with_relations(node_id)
-                    chain_str = format_chain_with_relations(af.graph, path)
-                    action_entries.append((act_val, chain_str))
+    def submit_input():
+        user_input = entry.get().strip()
+        entry.delete(0, tk.END)  # 清空输入框
+        if user_input.lower() in ["quit", "exit", "q"]:
+            RUNNING = False
+            root.quit()
+            return
+        if user_input:
+            af.inject_text(user_input)
+            # 可选：将用户输入也显示到状态区
+            status_text.insert(tk.END, f"用户输入: {user_input}\n")
+            status_text.see(tk.END)
 
-        action_entries.sort(key=lambda x: x[0], reverse=True)
-        for act_val, chain_str in action_entries:
-            chains.append(f"✅ Action ({act_val:.4f}): {chain_str}")
+            # 新增：立即计算并显示新状态，确保焦点切换
+            mode_str = "🔥 CEN (专注)" if af.am.lambda_mode > 0.5 else "💤 DMN (游荡)"
+            top_node_id = af.am.get_top_node()
+            focus_str = "放空" if not top_node_id else f"{af.graph.get_node(top_node_id).attributes.get('name', top_node_id)} ({af.am.get_activation(top_node_id):.2f})"
+            status_line = f"[状态] {mode_str} | 🧠 焦点: {focus_str}"
+            status_text.insert(tk.END, status_line + "\n")
+            status_text.see(tk.END)
 
-        # Output
-        print("\n🔗 推理链条:")
-        if chains:
-            for i, desc in enumerate(chains, 1):
-                print(f"  {i}. {desc}")
-        else:
-            print("无显著推理链条")
+    submit_button = tk.Button(input_frame, text="提交", command=submit_input)
+    submit_button.pack(side=tk.LEFT, padx=5)
 
-    print("\n👋 认知引擎已关闭。")
+    # 绑定Enter键提交
+    entry.bind("<Return>", lambda event: submit_input())
+
+    # 主循环：检查队列并更新UI
+    def check_queue():
+        try:
+            while not update_queue.empty():
+                msg = update_queue.get_nowait()
+                status_text.insert(tk.END, msg)
+                status_text.see(tk.END)  # 滚动到最新
+        except queue.Empty:
+            pass
+        if RUNNING:
+            root.after(100, check_queue)  # 每100ms检查一次
+
+    # 启动队列检查
+    check_queue()
+
+    # 初始消息
+    status_text.insert(tk.END, "=== Haru 认知系统 (实时版) ===\n")
+    status_text.insert(tk.END, "系统正在后台思考。你可以随时输入文字打断它。\n")
+    status_text.insert(tk.END, "当你不说话时，它会自己进入 DMN 模式游荡。\n")
+    status_text.see(tk.END)
+
+    # 运行GUI主循环
+    root.mainloop()
+
+    # 清理
+    RUNNING = False
+    print("\n👋 系统关闭。")
+
 
 if __name__ == "__main__":
-    main()
+    main_gui()

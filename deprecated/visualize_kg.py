@@ -1,6 +1,6 @@
 # visualize_kg.py
 # No changes, already unified.
-
+from utils import normalize_concept, generate_node_id
 import json
 import os
 from collections import defaultdict

@@ -1,19 +1,17 @@
 # action_executor.py
 # Unified imports.
-# Secure exec context.
 import logging
 import os
 import importlib.util
 from typing import Any, Dict, List
 from Knowledge_Graph import KnowledgeGraph, Node
-from nl_driven_activation import extract_keywords
 import time
+from utils import normalize_concept, generate_node_id
 
 logger = logging.getLogger(__name__)
 
-
 class ActionExecutor:
-    def __init__(self, graph: KnowledgeGraph, activation_manager, threshold: float = 0.2):
+    def __init__(self, graph: KnowledgeGraph, activation_manager, threshold: float = 0.1):  # 降低阈值
         self.graph = graph
         self.am = activation_manager
         self.threshold = threshold
@@ -33,7 +31,6 @@ class ActionExecutor:
             return
         logger.info(f"▶️ Executing {len(actions)} action(s)...")
 
-        # 获取当前文件所在目录，用于查找外部脚本
         executor_dir = os.path.dirname(os.path.abspath(__file__))
 
         for act in actions:
@@ -44,47 +41,53 @@ class ActionExecutor:
                 logger.warning(f"Action node {node_id} has no executable code.")
                 continue
 
-            # ===== 新增：判断是否为外部 .py 脚本 =====
+            # ===== 判断是否为外部 .py 脚本 =====
             is_external_script = (
-                code.endswith('.py') and
-                '\n' not in code and
-                ';' not in code and
-                not code.startswith('/') and
-                not code.startswith('\\')
+                code.endswith('.py')
+                and '\n' not in code
+                and ';' not in code
+                and not code.startswith('/')
+                and not code.startswith('\\')
             )
 
             if is_external_script:
                 script_path = os.path.join(executor_dir, code)
                 if os.path.isfile(script_path):
                     try:
-                        # 动态加载模块
                         spec = importlib.util.spec_from_file_location("_ext_action", script_path)
                         module = importlib.util.module_from_spec(spec)
                         spec.loader.exec_module(module)
-
-                        # 调用 run(kg, am, current_text)
                         if hasattr(module, 'run'):
                             module.run(self.graph, self.am, current_text)
                         else:
                             logger.warning(f"Script {code} has no 'run' function. Skipping execution.")
-                        continue  # 成功执行脚本，跳过 exec
+                        # 新增：执行后deactivate
+                        self.am.activations[node_id] = 0.05  # 低于阈值，避免重复
+                        continue
                     except Exception as e:
                         logger.error(f"External script execution failed for {node_id} ({code}): {e}")
                         continue
 
-            # ===== 原有内联代码执行逻辑（完全保留）=====
+            # ===== 内联代码执行 =====
             exec_context = {
                 "graph": self.graph,
                 "am": self.am,
                 "focus_of_attention": current_focus,
                 "text": current_text,
-                "extract_keywords": extract_keywords,
+                # 注意：已移除 extract_keywords
                 "print": print,
                 "time": time,
                 "Node": Node,
-                "__builtins__": {'max': max, 'min': min, 'len': len, 'int': int, 'float': float, 'str': str, 'dict': dict, 'list': list, 'set': set}
+                "__builtins__": {
+                    'max': max, 'min': min, 'len': len,
+                    'int': int, 'float': float, 'str': str,
+                    'dict': dict, 'list': list, 'set': set
+                }
             }
+
             try:
                 exec(code, exec_context)
+                # 新增：执行后deactivate
+                self.am.activations[node_id] = 0.05  # 低于阈值，避免重复
             except Exception as e:
                 logger.error(f"Action execution failed for {node_id}: {e}")

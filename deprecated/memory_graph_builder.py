@@ -5,6 +5,7 @@
 import os
 import time
 from Knowledge_Graph import KnowledgeGraph, Node, Edge
+from utils import normalize_concept, generate_node_id
 
 class MemoryGraphBuilder:
     def __init__(self, graph_file: str = "knowledge_graph.json"):
