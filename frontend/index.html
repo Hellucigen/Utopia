@@ -1,0 +1,576 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unified Knowledge Graph Creator</title>
+  <style>
+    :root{
+      --bg:#050816;
+      --panel:#0b1220;
+      --card:#0f172a;
+      --line:#243044;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --accent:#38bdf8;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(135deg,#020617 0%,#050816 45%,#020617 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+    button,input,select,textarea{font:inherit}
+    button{border:0;border-radius:12px;padding:9px 12px;background:#22304a;color:var(--text);font-weight:700;cursor:pointer}
+    button:hover{filter:brightness(1.08)}
+    .primary{background:#0284c7}.good{background:#16a34a}.warn{background:#d97706}.bad{background:#dc2626}.ghost{background:transparent;border:1px solid var(--line)}
+    input,select,textarea{
+      width:100%;border:1px solid var(--line);border-radius:12px;padding:9px 10px;background:rgba(2,6,23,.9);color:var(--text)
+    }
+    textarea{resize:vertical;min-height:88px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.45}
+    label{display:block;margin:0 0 6px;color:var(--muted);font-size:12px}
+    .app{display:grid;grid-template-columns:430px 1fr;min-height:100vh}
+    .side{padding:16px;border-right:1px solid var(--line);background:rgba(11,18,32,.94);overflow:auto}
+    .main{padding:16px;overflow:auto}
+    h1{margin:0;font-size:22px}
+    h2{margin:0 0 10px;font-size:16px}
+    .sub{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+    .box,.card{border:1px solid var(--line);border-radius:16px;background:rgba(15,23,42,.92)}
+    .box{padding:12px;margin:12px 0}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .list{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto}
+    .item{padding:10px;border:1px solid var(--line);border-radius:12px;background:rgba(2,6,23,.72)}
+    .item.active{border-color:var(--accent);background:#082f49}
+    .meta{font-size:12px;color:var(--muted);line-height:1.45;word-break:break-all}
+    .title{font-weight:800;font-size:13px;line-height:1.45}
+    .badge{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:2px 8px;background:#172036;color:#cbd5e1;font-size:11px;font-weight:800}
+    .status{padding:10px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12px;line-height:1.5}
+    .status.good{border-color:rgba(34,197,94,.5)} .status.bad{border-color:rgba(239,68,68,.5)} .status.warn{border-color:rgba(245,158,11,.5)}
+    .tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+    .panel{display:none;padding:12px;margin-top:10px;border:1px solid var(--line);border-radius:16px;background:rgba(15,23,42,.85)}
+    .panel.active{display:block}
+    svg{width:100%;height:640px;border:1px solid var(--line);border-radius:18px;background:rgba(2,6,23,.82)}
+    .log{padding:8px;border-radius:10px;border:1px solid var(--line);background:rgba(2,6,23,.7);font-family:ui-monospace,Consolas,monospace;font-size:11px;white-space:pre-wrap;word-break:break-word}
+    .hint{padding:10px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:12px;line-height:1.5;background:rgba(2,6,23,.38)}
+    .node-label{fill:#e5e7eb;font-size:11px;font-weight:800;pointer-events:none}
+    .node-sub{fill:#cbd5e1;font-size:9px;pointer-events:none}
+    .edge-label{fill:#94a3b8;font-size:9px;pointer-events:none}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .split{display:grid;grid-template-columns:1fr 340px;gap:12px;align-items:start}
+    @media(max-width:1200px){.app{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid var(--line)}.split{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <h1>Unified Knowledge Graph Creator</h1>
+    <p class="sub">节点 / 边 / 感知器 / 扩散 / Top-k / 程序性执行</p>
+    <div id="status" class="status">等待连接后端</div>
+
+    <div class="tabs">
+      <button class="tab-btn primary" data-tab="natural">自然语言</button>
+      <button class="tab-btn" data-tab="graph">图谱编辑</button>
+      <button class="tab-btn" data-tab="runtime">扩散运行</button>
+      <button class="tab-btn" data-tab="storage">JSON存储</button>
+    </div>
+
+    <section id="panel-natural" class="panel active">
+      <h2>自然语言感知器</h2>
+      <div class="hint">输入自然语言后，系统会先激活自然语言输入处理节点，再做分词、解析、写回、扩散、Top-k 与程序性节点执行。</div>
+      <div class="box">
+        <label>自然语言输入</label>
+        <textarea id="nl-text">请把知识图谱的定义写成代码</textarea>
+        <div class="grid2" style="margin-top:8px">
+          <div><label>初始激活值</label><input id="nl-seed" type="number" step="0.1" value="1"></div>
+          <div><label>扩散步数</label><input id="nl-steps" type="number" step="1" value="3"></div>
+        </div>
+        <div class="toolbar">
+          <button class="primary" onclick="processNatural()">处理输入</button>
+          <button class="ghost" onclick="activateSeed()">只激活感知器</button>
+          <button class="ghost" onclick="oneSpread()">手动扩散一步</button>
+          <button class="ghost" onclick="oneRound()">扩散一轮</button>
+          <button class="good" onclick="startLoop()">实时扩散</button>
+          <button class="bad" onclick="stopLoop()">停止</button>
+        </div>
+      </div>
+      <div class="box">
+        <h2>处理结果</h2>
+        <div id="nl-result" class="log">暂无</div>
+      </div>
+    </section>
+
+    <section id="panel-graph" class="panel">
+      <h2>图谱编辑器</h2>
+      <div class="box">
+        <label>节点 ID</label><input id="node-id" placeholder="Node_A">
+        <div class="grid2" style="margin-top:8px">
+          <div>
+            <label>标签</label>
+            <select id="node-label">
+              <option value="declarative-semantic">declarative-semantic</option>
+              <option value="declarative-episodic">declarative-episodic</option>
+              <option value="procedural">procedural</option>
+            </select>
+          </div>
+          <div>
+            <label>权重 [-2,2]</label><input id="node-weight" type="number" step="0.1" value="0.5">
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:8px">
+          <div>
+            <label>执行代码（程序性记忆）</label><input id="node-exec" placeholder="builtin:natural_language_input 或 Python code">
+          </div>
+          <div>
+            <label>激活度</label><input id="node-act" type="number" step="0.1" value="0">
+          </div>
+        </div>
+        <label style="margin-top:8px">附加属性 JSON</label><textarea id="node-attrs">{}</textarea>
+        <div class="toolbar">
+          <button class="primary" onclick="saveNode()">保存节点</button>
+          <button class="bad" onclick="deleteNode()">删除节点</button>
+          <button class="ghost" onclick="fillNodeFromSelection()">填充选中节点</button>
+        </div>
+      </div>
+
+      <div class="box">
+        <label>起点</label><input id="edge-src" placeholder="Node_A">
+        <label style="margin-top:8px">终点</label><input id="edge-dst" placeholder="Node_B">
+        <div class="grid2" style="margin-top:8px">
+          <div><label>关系描述</label><input id="edge-rel" value="related_to"></div>
+          <div><label>权重 [-2,2]</label><input id="edge-weight" type="number" step="0.1" value="0.5"></div>
+        </div>
+        <div class="toolbar">
+          <button class="primary" onclick="saveEdge()">保存边</button>
+          <button class="bad" onclick="deleteEdge()">删除选中边</button>
+          <button class="ghost" onclick="fillEdgeFromSelection()">填充选中边</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-runtime" class="panel">
+      <h2>主扩散运行</h2>
+      <div class="box">
+        <div class="grid2">
+          <div><label>initial_match_activation</label><input id="p-initial" type="number" step="0.05"></div>
+          <div><label>match_decay</label><input id="p-matchdecay" type="number" step="0.05"></div>
+          <div><label>spread_beta</label><input id="p-beta" type="number" step="0.05"></div>
+          <div><label>decay_lambda</label><input id="p-lambda" type="number" step="0.05"></div>
+          <div><label>activation_threshold</label><input id="p-threshold" type="number" step="0.01"></div>
+          <div><label>max_activation</label><input id="p-maxact" type="number" step="0.1"></div>
+          <div><label>top_k</label><input id="p-topk" type="number" step="1"></div>
+          <div><label>action_threshold</label><input id="p-action" type="number" step="0.1"></div>
+          <div><label>realtime_interval_ms</label><input id="p-interval" type="number" step="50"></div>
+          <div><label>max_spread_steps</label><input id="p-maxsteps" type="number" step="1"></div>
+          <div><label>natural_language_seed_id</label><input id="p-seedid"></div>
+          <div><label>result_limit</label><input id="p-resultlimit" type="number" step="1"></div>
+        </div>
+        <div class="toolbar">
+          <button class="primary" onclick="saveParams()">保存参数</button>
+          <button class="ghost" onclick="tick()">单步 Tick</button>
+          <button class="ghost" onclick="spreadMany()">多步扩散</button>
+          <button class="good" onclick="startLoop()">开始实时</button>
+          <button class="bad" onclick="stopLoop()">停止实时</button>
+          <button class="ghost" onclick="resetGraph()">重置图谱</button>
+        </div>
+      </div>
+      <div class="box">
+        <h2>Top-k / 执行结果</h2>
+        <div id="runtime-result" class="log">暂无</div>
+      </div>
+    </section>
+
+    <section id="panel-storage" class="panel">
+      <h2>JSON 存储</h2>
+      <div class="box">
+        <div class="toolbar">
+          <button class="ghost" onclick="refreshJSON()">刷新当前图谱 JSON</button>
+          <button class="ghost" onclick="importJSON('merge')">导入并合并</button>
+          <button class="ghost" onclick="importJSON('replace')">导入并替换</button>
+          <button class="good" onclick="downloadJSON()">下载 JSON</button>
+        </div>
+        <label style="margin-top:8px">图谱 JSON</label>
+        <textarea id="json-area" style="min-height:260px"></textarea>
+      </div>
+    </section>
+
+    <div class="box">
+      <h2>当前选中</h2>
+      <div id="selection-box" class="log">未选中节点/边</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="split">
+      <div>
+        <div class="box">
+          <h2>交互式知识图谱</h2>
+          <div class="hint">点击节点或边可选中；拖拽节点可移动；右侧保存会写入后端 JSON。当前版本优先满足论文逻辑，不保留自认知子图、记忆回忆、图谱治理等冲突功能。</div>
+        </div>
+        <svg id="graph-svg" viewBox="0 0 1200 640"></svg>
+      </div>
+      <div>
+        <div class="box">
+          <h2>节点列表</h2>
+          <div id="node-list" class="list"></div>
+        </div>
+        <div class="box">
+          <h2>边列表</h2>
+          <div id="edge-list" class="list"></div>
+        </div>
+        <div class="box">
+          <h2>日志</h2>
+          <div id="log-list" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+let graph = {nodes:[], edges:[], top_k:[], related_edges:[], logs:[]};
+let runtime = {};
+let selectedNode = null;
+let selectedEdge = null;
+let drag = null;
+let loopTimer = null;
+let positions = {};
+
+function esc(s){return String(s ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+async function api(path, opt = {}){
+  const res = await fetch(API + path, {headers: {"Content-Type":"application/json"}, ...opt});
+  if(!res.ok) throw new Error(await res.text());
+  return await res.json();
+}
+function setStatus(text, kind=""){
+  const el = document.getElementById("status");
+  el.textContent = text;
+  el.className = "status " + (kind || "");
+}
+function setPanel(name){
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("primary"));
+  document.getElementById("panel-" + name).classList.add("active");
+  document.querySelector(`.tab-btn[data-tab="${name}"]`).classList.add("primary");
+}
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => setPanel(btn.dataset.tab));
+});
+
+function savePositions(){
+  localStorage.setItem("ukg_positions_v1", JSON.stringify(positions));
+}
+function loadPositions(){
+  try{ positions = JSON.parse(localStorage.getItem("ukg_positions_v1") || "{}"); }catch(e){ positions = {}; }
+}
+loadPositions();
+
+function nodeColor(node){
+  if (node.label === "procedural") return "#f59e0b";
+  if (node.label === "declarative-episodic") return "#a78bfa";
+  return "#38bdf8";
+}
+
+function pickPos(id, idx){
+  if(!positions[id]){
+    const angle = (idx / Math.max(1, graph.nodes.length)) * Math.PI * 2;
+    positions[id] = {x: 600 + Math.cos(angle) * 220, y: 320 + Math.sin(angle) * 180};
+  }
+  return positions[id];
+}
+
+function renderGraph(){
+  const svg = document.getElementById("graph-svg");
+  const nodeById = Object.fromEntries(graph.nodes.map(n => [n.id, n]));
+  const out = [];
+  out.push(`<defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"></path>
+    </marker>
+  </defs>`);
+  graph.edges.forEach((e, i) => {
+    const s = pickPos(e.src, i);
+    const t = pickPos(e.dst, i + 1);
+    const dx = t.x - s.x, dy = t.y - s.y;
+    const len = Math.max(1, Math.hypot(dx, dy));
+    const ox = dx / len * 20, oy = dy / len * 20;
+    const mx = (s.x + t.x) / 2, my = (s.y + t.y) / 2;
+    const active = selectedEdge && selectedEdge.id === e.id ? 'stroke="#f59e0b" stroke-width="3.2"' : 'stroke="#64748b" stroke-width="1.7"';
+    out.push(`<line x1="${s.x+ox}" y1="${s.y+oy}" x2="${t.x-ox}" y2="${t.y-oy}" ${active} marker-end="url(#arrow)" data-edge-id="${e.id}" style="cursor:pointer"/>`);
+    out.push(`<text x="${mx}" y="${my}" class="edge-label" text-anchor="middle">${esc(e.relation)}</text>`);
+  });
+
+  graph.nodes.forEach((n, i) => {
+    const p = pickPos(n.id, i);
+    const r = 18 + Math.max(0, Math.min(18, Number(n.activation || 0) * 8));
+    const fill = nodeColor(n);
+    const selected = selectedNode && selectedNode.id === n.id;
+    out.push(`<g data-node-id="${n.id}" style="cursor:grab">
+      <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${fill}" opacity="0.95" stroke="${selected ? '#f59e0b' : '#0f172a'}" stroke-width="${selected ? 4 : 2}"></circle>
+      <text x="${p.x}" y="${p.y-2}" text-anchor="middle" class="node-label">${esc(n.id)}</text>
+      <text x="${p.x}" y="${p.y+12}" text-anchor="middle" class="node-sub">${esc(n.label)} | a=${Number(n.activation || 0).toFixed(2)}</text>
+    </g>`);
+  });
+  svg.innerHTML = out.join("");
+
+  svg.querySelectorAll("[data-node-id]").forEach(g => {
+    g.addEventListener("pointerdown", ev => {
+      ev.preventDefault();
+      const id = g.getAttribute("data-node-id");
+      selectedNode = graph.nodes.find(x => x.id === id) || null;
+      selectedEdge = null;
+      fillSelection();
+      renderLists();
+      drag = {id, startX: ev.clientX, startY: ev.clientY, base: {...positions[id]}};
+      g.setPointerCapture(ev.pointerId);
+    });
+    g.addEventListener("pointermove", ev => {
+      if(!drag || drag.id !== g.getAttribute("data-node-id")) return;
+      positions[drag.id] = {x: drag.base.x + (ev.clientX - drag.startX), y: drag.base.y + (ev.clientY - drag.startY)};
+      savePositions();
+      renderGraph();
+    });
+    g.addEventListener("pointerup", () => { drag = null; });
+    g.addEventListener("click", () => {
+      const id = g.getAttribute("data-node-id");
+      selectedNode = graph.nodes.find(x => x.id === id) || null;
+      selectedEdge = null;
+      fillSelection();
+      renderLists();
+      renderGraph();
+    });
+  });
+
+  svg.querySelectorAll("[data-edge-id]").forEach(el => {
+    el.addEventListener("click", () => {
+      const id = el.getAttribute("data-edge-id");
+      selectedEdge = graph.edges.find(x => x.id === id) || null;
+      selectedNode = null;
+      fillSelection();
+      renderLists();
+      renderGraph();
+    });
+  });
+}
+
+function renderLists(){
+  const nodeList = document.getElementById("node-list");
+  const edgeList = document.getElementById("edge-list");
+  const logList = document.getElementById("log-list");
+  nodeList.innerHTML = graph.nodes.map(n => `
+    <div class="item ${selectedNode && selectedNode.id === n.id ? 'active' : ''}" onclick="selectNode('${esc(n.id)}')">
+      <div class="title">${esc(n.id)} <span class="badge">${esc(n.label)}</span></div>
+      <div class="meta">w=${Number(n.weight ?? 0).toFixed(2)} | a=${Number(n.activation ?? 0).toFixed(2)}<br>created=${esc(n.created_at || '')}<br>last=${esc(n.last_access_time || '')}</div>
+    </div>
+  `).join("");
+  edgeList.innerHTML = graph.edges.map(e => `
+    <div class="item ${selectedEdge && selectedEdge.id === e.id ? 'active' : ''}" onclick="selectEdge('${esc(e.id)}')">
+      <div class="title">${esc(e.src)} → ${esc(e.dst)} <span class="badge">${esc(e.relation)}</span></div>
+      <div class="meta">w=${Number(e.weight ?? 0).toFixed(2)} | a=${Number(e.activation ?? 0).toFixed(2)}<br>${esc(e.id)}</div>
+    </div>
+  `).join("");
+  logList.innerHTML = (graph.logs || []).slice(0, 30).map(x => `<div class="item"><div class="meta">${esc(x)}</div></div>`).join("");
+}
+
+function fillSelection(){
+  const box = document.getElementById("selection-box");
+  if(selectedNode){
+    box.innerHTML = JSON.stringify(selectedNode, null, 2);
+  } else if(selectedEdge){
+    box.innerHTML = JSON.stringify(selectedEdge, null, 2);
+  } else {
+    box.textContent = "未选中节点/边";
+  }
+}
+
+function selectNode(id){
+  selectedNode = graph.nodes.find(x => x.id === id) || null;
+  selectedEdge = null;
+  fillSelection();
+  fillNodeFromSelection();
+  renderGraph();
+  renderLists();
+}
+function selectEdge(id){
+  selectedEdge = graph.edges.find(x => x.id === id) || null;
+  selectedNode = null;
+  fillSelection();
+  fillEdgeFromSelection();
+  renderGraph();
+  renderLists();
+}
+
+function fillNodeFromSelection(){
+  if(!selectedNode) return;
+  document.getElementById("node-id").value = selectedNode.id;
+  document.getElementById("node-label").value = selectedNode.label || "declarative-semantic";
+  document.getElementById("node-weight").value = selectedNode.weight ?? 0;
+  document.getElementById("node-exec").value = selectedNode.execution || "";
+  document.getElementById("node-act").value = selectedNode.activation ?? 0;
+  document.getElementById("node-attrs").value = JSON.stringify(selectedNode.attributes || {}, null, 2);
+}
+function fillEdgeFromSelection(){
+  if(!selectedEdge) return;
+  document.getElementById("edge-src").value = selectedEdge.src;
+  document.getElementById("edge-dst").value = selectedEdge.dst;
+  document.getElementById("edge-rel").value = selectedEdge.relation;
+  document.getElementById("edge-weight").value = selectedEdge.weight ?? 0;
+}
+
+async function refresh(){
+  const data = await api("/api/graph");
+  graph = data;
+  runtime = await api("/api/runtime");
+  document.getElementById("json-area").value = JSON.stringify(await api("/api/export"), null, 2);
+  const p = runtime.params || {};
+  document.getElementById("p-initial").value = p.initial_match_activation ?? "";
+  document.getElementById("p-matchdecay").value = p.match_decay ?? "";
+  document.getElementById("p-beta").value = p.spread_beta ?? "";
+  document.getElementById("p-lambda").value = p.decay_lambda ?? "";
+  document.getElementById("p-threshold").value = p.activation_threshold ?? "";
+  document.getElementById("p-maxact").value = p.max_activation ?? "";
+  document.getElementById("p-topk").value = p.top_k ?? "";
+  document.getElementById("p-action").value = p.action_threshold ?? "";
+  document.getElementById("p-interval").value = p.realtime_interval_ms ?? "";
+  document.getElementById("p-maxsteps").value = p.max_spread_steps ?? "";
+  document.getElementById("p-seedid").value = p.natural_language_seed_id ?? "";
+  document.getElementById("p-resultlimit").value = p.result_limit ?? "";
+  renderGraph();
+  renderLists();
+  fillSelection();
+  setStatus("后端同步完成", "good");
+}
+async function saveNode(){
+  const payload = {
+    id: document.getElementById("node-id").value.trim(),
+    label: document.getElementById("node-label").value,
+    weight: Number(document.getElementById("node-weight").value || 0),
+    activation: Number(document.getElementById("node-act").value || 0),
+    execution: document.getElementById("node-exec").value,
+    attributes: JSON.parse(document.getElementById("node-attrs").value || "{}"),
+  };
+  const r = await api("/api/node", {method:"POST", body: JSON.stringify(payload)});
+  graph = r.graph; renderGraph(); renderLists(); setStatus("节点已保存", "good");
+}
+async function deleteNode(){
+  const id = document.getElementById("node-id").value.trim();
+  if(!id) return;
+  await api("/api/node/" + encodeURIComponent(id), {method:"DELETE"});
+  selectedNode = null; await refresh(); setStatus("节点已删除", "warn");
+}
+async function saveEdge(){
+  const payload = {
+    src: document.getElementById("edge-src").value.trim(),
+    dst: document.getElementById("edge-dst").value.trim(),
+    relation: document.getElementById("edge-rel").value.trim(),
+    weight: Number(document.getElementById("edge-weight").value || 0),
+    attributes: {}
+  };
+  const r = await api("/api/edge", {method:"POST", body: JSON.stringify(payload)});
+  graph = r.graph; renderGraph(); renderLists(); setStatus("边已保存", "good");
+}
+async function deleteEdge(){
+  if(!selectedEdge) return;
+  await api("/api/edge/" + encodeURIComponent(selectedEdge.id), {method:"DELETE"});
+  selectedEdge = null; await refresh(); setStatus("边已删除", "warn");
+}
+async function activateSeed(){
+  const seed = (runtime.params && runtime.params.natural_language_seed_id) || "Natural_Language_Input_Processor";
+  const value = Number(document.getElementById("nl-seed").value || 1);
+  const r = await api("/api/runtime/activate", {method:"POST", body: JSON.stringify({node_ids:[seed], value, reason:"manual_seed"})});
+  graph = r.graph; runtime = r.runtime; document.getElementById("runtime-result").textContent = JSON.stringify(r, null, 2); renderGraph(); renderLists();
+  setStatus("感知器节点已激活", "good");
+}
+async function oneSpread(){
+  const r = await api("/api/runtime/spread", {method:"POST", body: JSON.stringify({steps:1})});
+  graph = r.graph; runtime = r.runtime; document.getElementById("runtime-result").textContent = JSON.stringify(r, null, 2); renderGraph(); renderLists();
+  setStatus("已手动扩散一步", "good");
+}
+async function oneRound(){
+  const steps = Number(document.getElementById("nl-steps").value || 3);
+  const r = await api("/api/runtime/spread", {method:"POST", body: JSON.stringify({steps})});
+  graph = r.graph; runtime = r.runtime; document.getElementById("runtime-result").textContent = JSON.stringify(r, null, 2); renderGraph(); renderLists();
+  setStatus("已扩散一轮", "good");
+}
+async function tick(){
+  const r = await api("/api/runtime/tick", {method:"POST"});
+  graph = r.graph; runtime = r.runtime; document.getElementById("runtime-result").textContent = JSON.stringify(r, null, 2); renderGraph(); renderLists();
+  setStatus("Tick 完成", "good");
+}
+async function spreadMany(){
+  const steps = Number(document.getElementById("p-maxsteps").value || 3);
+  const r = await api("/api/runtime/spread", {method:"POST", body: JSON.stringify({steps})});
+  graph = r.graph; runtime = r.runtime; document.getElementById("runtime-result").textContent = JSON.stringify(r, null, 2); renderGraph(); renderLists();
+  setStatus("多步扩散完成", "good");
+}
+async function processNatural(){
+  const text = document.getElementById("nl-text").value;
+  const seed = Number(document.getElementById("nl-seed").value || 1);
+  const steps = Number(document.getElementById("nl-steps").value || 3);
+  const r = await api("/api/natural/process", {method:"POST", body: JSON.stringify({text, seed_value:seed, spread_steps:steps, auto_execute:true})});
+  graph = r.graph; runtime = r.runtime;
+  document.getElementById("nl-result").textContent = JSON.stringify(r, null, 2);
+  document.getElementById("runtime-result").textContent = JSON.stringify({top_k:r.top_k, action_results:r.action_results}, null, 2);
+  renderGraph(); renderLists();
+  setStatus("自然语言输入已处理", "good");
+}
+async function saveParams(){
+  const payload = {
+    initial_match_activation: Number(document.getElementById("p-initial").value || 0),
+    match_decay: Number(document.getElementById("p-matchdecay").value || 0),
+    spread_beta: Number(document.getElementById("p-beta").value || 0),
+    decay_lambda: Number(document.getElementById("p-lambda").value || 0),
+    activation_threshold: Number(document.getElementById("p-threshold").value || 0),
+    max_activation: Number(document.getElementById("p-maxact").value || 0),
+    top_k: Number(document.getElementById("p-topk").value || 0),
+    action_threshold: Number(document.getElementById("p-action").value || 0),
+    realtime_interval_ms: Number(document.getElementById("p-interval").value || 0),
+    max_spread_steps: Number(document.getElementById("p-maxsteps").value || 0),
+    natural_language_seed_id: document.getElementById("p-seedid").value.trim(),
+    result_limit: Number(document.getElementById("p-resultlimit").value || 0),
+  };
+  runtime = await api("/api/runtime/params", {method:"POST", body: JSON.stringify(payload)});
+  setStatus("参数已保存", "good");
+}
+async function startLoop(){
+  await api("/api/runtime/start", {method:"POST"});
+  if(loopTimer) clearInterval(loopTimer);
+  loopTimer = setInterval(refresh, 900);
+  setStatus("实时扩散已启动", "good");
+}
+async function stopLoop(){
+  await api("/api/runtime/stop", {method:"POST"});
+  if(loopTimer) clearInterval(loopTimer);
+  loopTimer = null;
+  setStatus("实时扩散已停止", "warn");
+}
+async function resetGraph(){
+  await api("/api/graph/reset", {method:"POST"});
+  await refresh();
+  setStatus("图谱已重置", "warn");
+}
+async function refreshJSON(){
+  document.getElementById("json-area").value = JSON.stringify(await api("/api/export"), null, 2);
+  setStatus("JSON 已刷新", "good");
+}
+async function importJSON(mode){
+  const payload = JSON.parse(document.getElementById("json-area").value || "{}");
+  const r = await api("/api/graph/import", {method:"POST", body: JSON.stringify({payload: payload.graph || payload, mode})});
+  graph = r.graph; await refresh(); setStatus("JSON 导入完成", "good");
+}
+function downloadJSON(){
+  const blob = new Blob([document.getElementById("json-area").value], {type:"application/json;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "knowledge_graph.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape"){ selectedNode = null; selectedEdge = null; fillSelection(); renderGraph(); renderLists(); }
+});
+refresh().catch(err => setStatus("连接失败: " + err.message, "bad"));
+</script>
+</body>
+</html>

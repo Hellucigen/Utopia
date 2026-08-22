@@ -1,0 +1,1527 @@
+{
+  "items": [
+    {
+      "id": "working_1778086209807",
+      "createdAt": "2026-05-06T16:50:09.807185+00:00",
+      "updatedAt": "2026-05-06T16:50:14.814079+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778086203238",
+      "text": "苹果吃起来有甜味",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778086209794",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8300000000000001,
+            "attributes": {
+              "source_text": "苹果吃起来有甜味",
+              "intent_class": "assertion",
+              "summary": "苹果有甜味",
+              "importance": 0.7,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:50:09.794309+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_苹果",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "source": "general_assertion",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_甜味",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "topic_value",
+              "value": "甜味",
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778086209794_agent_is_User_1778086209795",
+            "src": "Event_1778086209794",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778086209794_action_is_Assert_Statement_1778086209795",
+            "src": "Event_1778086209794",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Topic_苹果_has_taste_Topic_甜味_1778086209795",
+            "src": "Topic_苹果",
+            "dst": "Topic_甜味",
+            "relation": "has_taste",
+            "weight": 0.7,
+            "attributes": {
+              "derived_from_event": "Event_1778086209794",
+              "requires_review": true,
+              "confidence": 0.9
+            }
+          },
+          {
+            "id": "e_Event_1778086209794_content_is_Topic_甜味_1778086209795",
+            "src": "Event_1778086209794",
+            "dst": "Topic_甜味",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "Topic_苹果--has_taste-->Topic_甜味"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778086209794",
+            "source_text": "苹果吃起来有甜味",
+            "intent_class": "assertion",
+            "summary": "苹果有甜味",
+            "importance": 0.7
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "苹果吃起来有甜味",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778086214805"
+    },
+    {
+      "id": "working_1778086175714",
+      "createdAt": "2026-05-06T16:49:35.714671+00:00",
+      "updatedAt": "2026-05-06T16:49:38.832412+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778086169145",
+      "text": "电脑可以用来玩游戏",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778086175699",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8700000000000001,
+            "attributes": {
+              "source_text": "电脑可以用来玩游戏",
+              "intent_class": "assertion",
+              "summary": "电脑可以用来玩游戏",
+              "importance": 0.8,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:49:35.699606+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_电脑",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "source": "general_assertion",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_玩游戏",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "topic_value",
+              "value": "玩游戏",
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778086175699_agent_is_User_1778086175701",
+            "src": "Event_1778086175699",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778086175699_action_is_Assert_Statement_1778086175701",
+            "src": "Event_1778086175699",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Topic_电脑_can_be_used_for_Topic_玩游戏_1778086175701",
+            "src": "Topic_电脑",
+            "dst": "Topic_玩游戏",
+            "relation": "can_be_used_for",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778086175699",
+              "requires_review": true,
+              "confidence": 0.95
+            }
+          },
+          {
+            "id": "e_Event_1778086175699_content_is_Topic_玩游戏_1778086175701",
+            "src": "Event_1778086175699",
+            "dst": "Topic_玩游戏",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "Topic_电脑--can_be_used_for-->Topic_玩游戏"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778086175699",
+            "source_text": "电脑可以用来玩游戏",
+            "intent_class": "assertion",
+            "summary": "电脑可以用来玩游戏",
+            "importance": 0.8
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "电脑可以用来玩游戏",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778086178823"
+    },
+    {
+      "id": "working_1778086009440",
+      "createdAt": "2026-05-06T16:46:49.440903+00:00",
+      "updatedAt": "2026-05-06T16:46:53.453453+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778085999435",
+      "text": "褪黑素有助于睡眠",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778086009412",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8300000000000001,
+            "attributes": {
+              "source_text": "褪黑素有助于睡眠",
+              "intent_class": "assertion",
+              "summary": "褪黑素有助于睡眠",
+              "importance": 0.7,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:46:49.413409+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_褪黑素",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "topic_value",
+              "value": "褪黑素",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_睡眠",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "topic_value",
+              "value": "睡眠",
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778086009412_agent_is_User_1778086009417",
+            "src": "Event_1778086009412",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778086009412_action_is_Assert_Statement_1778086009417",
+            "src": "Event_1778086009412",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_User_interested_in_Topic_褪黑素_1778086009417",
+            "src": "User",
+            "dst": "Topic_褪黑素",
+            "relation": "interested_in",
+            "weight": 0.7,
+            "attributes": {
+              "derived_from_event": "Event_1778086009412",
+              "requires_review": true,
+              "confidence": 0.9
+            }
+          },
+          {
+            "id": "e_Event_1778086009412_topic_is_Topic_褪黑素_1778086009417",
+            "src": "Event_1778086009412",
+            "dst": "Topic_褪黑素",
+            "relation": "topic_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "User--interested_in-->Topic_褪黑素"
+            }
+          },
+          {
+            "id": "e_User_benefits_for_Topic_睡眠_1778086009417",
+            "src": "User",
+            "dst": "Topic_睡眠",
+            "relation": "benefits_for",
+            "weight": 0.7,
+            "attributes": {
+              "derived_from_event": "Event_1778086009412",
+              "requires_review": true,
+              "confidence": 0.9
+            }
+          },
+          {
+            "id": "e_Event_1778086009412_content_is_Topic_睡眠_1778086009417",
+            "src": "Event_1778086009412",
+            "dst": "Topic_睡眠",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "User--benefits_for-->Topic_睡眠"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778086009412",
+            "source_text": "褪黑素有助于睡眠",
+            "intent_class": "assertion",
+            "summary": "褪黑素有助于睡眠",
+            "importance": 0.7
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "褪黑素有助于睡眠",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778086013447"
+    },
+    {
+      "id": "working_1778085854920",
+      "createdAt": "2026-05-06T16:44:14.920242+00:00",
+      "updatedAt": "2026-05-06T16:44:21.782682+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778085848626",
+      "text": "你的后端是用Python语言写的",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778085854899",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8300000000000001,
+            "attributes": {
+              "source_text": "你的后端是用Python语言写的",
+              "intent_class": "assertion",
+              "summary": "你的后端是用Python语言写的",
+              "importance": 0.7,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:44:14.899476+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Language_Python",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778085854899_agent_is_User_1778085854900",
+            "src": "Event_1778085854899",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778085854899_action_is_Assert_Statement_1778085854900",
+            "src": "Event_1778085854899",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Companion_Self_implemented_in_Language_Python_1778085854900",
+            "src": "Companion_Self",
+            "dst": "Language_Python",
+            "relation": "implemented_in",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778085854899",
+              "requires_review": true,
+              "confidence": 1.0
+            }
+          },
+          {
+            "id": "e_Event_1778085854899_content_is_Language_Python_1778085854900",
+            "src": "Event_1778085854899",
+            "dst": "Language_Python",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "Companion_Self--implemented_in-->Language_Python"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778085854899",
+            "source_text": "你的后端是用Python语言写的",
+            "intent_class": "assertion",
+            "summary": "你的后端是用Python语言写的",
+            "importance": 0.7
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [
+          "Rule fact dropped (not in vocab): 你的后端 --is_a--> 用Python语言写"
+        ],
+        "source_text": "你的后端是用Python语言写的",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778085861778"
+    },
+    {
+      "id": "working_1778085838121",
+      "createdAt": "2026-05-06T16:43:58.121388+00:00",
+      "updatedAt": "2026-05-06T16:43:58.137514+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778085831648",
+      "text": "你的后端是用Python语言写的",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778085838100",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8300000000000001,
+            "attributes": {
+              "source_text": "你的后端是用Python语言写的",
+              "intent_class": "assertion",
+              "summary": "你的后端是用Python语言写的",
+              "importance": 0.7,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:43:58.100442+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Language_Python",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778085838100_agent_is_User_1778085838105",
+            "src": "Event_1778085838100",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778085838100_action_is_Assert_Statement_1778085838105",
+            "src": "Event_1778085838100",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Companion_Self_implemented_in_Language_Python_1778085838105",
+            "src": "Companion_Self",
+            "dst": "Language_Python",
+            "relation": "implemented_in",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778085838100",
+              "requires_review": true,
+              "confidence": 1.0
+            }
+          },
+          {
+            "id": "e_Event_1778085838100_content_is_Language_Python_1778085838105",
+            "src": "Event_1778085838100",
+            "dst": "Language_Python",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "Companion_Self--implemented_in-->Language_Python"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778085838100",
+            "source_text": "你的后端是用Python语言写的",
+            "intent_class": "assertion",
+            "summary": "你的后端是用Python语言写的",
+            "importance": 0.7
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [
+          "Rule fact dropped (not in vocab): 你的后端 --is_a--> 用Python语言写"
+        ],
+        "source_text": "你的后端是用Python语言写的",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "auto_promoted",
+      "pending_id": "pending_1778085838131"
+    },
+    {
+      "id": "working_1778085664442",
+      "createdAt": "2026-05-06T16:41:04.442201+00:00",
+      "updatedAt": "2026-05-06T16:41:09.446299+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778085657628",
+      "text": "你的后端是用Python语言写的",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778085664420",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8700000000000001,
+            "attributes": {
+              "source_text": "你的后端是用Python语言写的",
+              "intent_class": "assertion",
+              "summary": "你的后端是用Python语言写的",
+              "importance": 0.8,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:41:04.420613+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Topic_后端技术",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "topic_value",
+              "value": "后端技术",
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778085664420_agent_is_User_1778085664424",
+            "src": "Event_1778085664420",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778085664420_action_is_Assert_Statement_1778085664424",
+            "src": "Event_1778085664420",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_User_interested_in_Topic_后端技术_1778085664424",
+            "src": "User",
+            "dst": "Topic_后端技术",
+            "relation": "interested_in",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778085664420",
+              "requires_review": true,
+              "confidence": 0.9
+            }
+          },
+          {
+            "id": "e_Event_1778085664420_topic_is_Topic_后端技术_1778085664424",
+            "src": "Event_1778085664420",
+            "dst": "Topic_后端技术",
+            "relation": "topic_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "User--interested_in-->Topic_后端技术"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778085664420",
+            "source_text": "你的后端是用Python语言写的",
+            "intent_class": "assertion",
+            "summary": "你的后端是用Python语言写的",
+            "importance": 0.8
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [
+          "Rule fact dropped (not in vocab): 你的后端 --is_a--> 用Python语言写"
+        ],
+        "source_text": "你的后端是用Python语言写的",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778085669442"
+    },
+    {
+      "id": "working_1778083750455",
+      "createdAt": "2026-05-06T16:09:10.455256+00:00",
+      "updatedAt": "2026-05-06T16:09:13.092120+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778083743363",
+      "text": "2026年五月六号，天气很热",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778083750434",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8700000000000001,
+            "attributes": {
+              "source_text": "2026年五月六号，天气很热",
+              "intent_class": "assertion",
+              "summary": "2026年5月6日的天气很热",
+              "importance": 0.8,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:09:10.434396+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Weather_2026_05_06",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778083750434_agent_is_User_1778083750435",
+            "src": "Event_1778083750434",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778083750434_action_is_Assert_Statement_1778083750435",
+            "src": "Event_1778083750434",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_User_believes_Weather_2026_05_06_1778083750435",
+            "src": "User",
+            "dst": "Weather_2026_05_06",
+            "relation": "believes",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778083750434",
+              "requires_review": true,
+              "confidence": 0.8
+            }
+          },
+          {
+            "id": "e_Event_1778083750434_content_is_Weather_2026_05_06_1778083750435",
+            "src": "Event_1778083750434",
+            "dst": "Weather_2026_05_06",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "User--believes-->Weather_2026_05_06"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778083750434",
+            "source_text": "2026年五月六号，天气很热",
+            "intent_class": "assertion",
+            "summary": "2026年5月6日的天气很热",
+            "importance": 0.8
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "2026年五月六号，天气很热",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778083753088"
+    },
+    {
+      "id": "working_1778083522323",
+      "createdAt": "2026-05-06T16:05:22.323436+00:00",
+      "updatedAt": "2026-05-06T16:05:22.706035+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778083513247",
+      "text": "你的名字是什么",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778083521844",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.75,
+            "attributes": {
+              "source_text": "你的名字是什么",
+              "intent_class": "question",
+              "summary": "用户询问你的名字是什么",
+              "importance": 0.5,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T16:05:21.861208+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Handle_Question",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Handle_Question",
+              "intent_class": "question",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778083521844_agent_is_User_1778083521861",
+            "src": "Event_1778083521844",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778083521844_action_is_Handle_Question_1778083521861",
+            "src": "Event_1778083521844",
+            "dst": "Handle_Question",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778083521844",
+            "source_text": "你的名字是什么",
+            "intent_class": "question",
+            "summary": "用户询问你的名字是什么",
+            "importance": 0.5
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "你的名字是什么",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "auto_promoted",
+      "pending_id": "pending_1778083522375"
+    },
+    {
+      "id": "working_1778073144675",
+      "createdAt": "2026-05-06T13:12:24.675114+00:00",
+      "updatedAt": "2026-05-06T13:12:33.163774+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778073132628",
+      "text": "虽然每天坚持跑步很累，但这确实是保持身体健康最有效的方法",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778073144213",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.9100000000000001,
+            "attributes": {
+              "source_text": "虽然每天坚持跑步很累，但这确实是保持身体健康最有效的方法",
+              "intent_class": "assertion",
+              "summary": "用户认为坚持跑步是保持身体健康的有效方法",
+              "importance": 0.9,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T13:12:24.213760+00:00"
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source"
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self"
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler"
+            }
+          },
+          {
+            "id": "Topic_坚持跑步",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "topic_value",
+              "value": "坚持跑步"
+            }
+          },
+          {
+            "id": "Outcome_保持身体健康",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "虽然每天坚持跑步很累，但这确实",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "source": "general_assertion"
+            }
+          },
+          {
+            "id": "保持身体健康最有效的方法",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "source": "rule_repair",
+              "src_surface": "虽然每天坚持跑步很累，但这确实",
+              "dst_surface": "保持身体健康最有效的方法"
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778073144213_agent_is_User_1778073144214",
+            "src": "Event_1778073144213",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778073144213_action_is_Assert_Statement_1778073144214",
+            "src": "Event_1778073144213",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_User_supports_Topic_坚持跑步_1778073144214",
+            "src": "User",
+            "dst": "Topic_坚持跑步",
+            "relation": "supports",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778073144213",
+              "requires_review": true,
+              "confidence": 0.8
+            }
+          },
+          {
+            "id": "e_Event_1778073144213_content_is_Topic_坚持跑步_1778073144214",
+            "src": "Event_1778073144213",
+            "dst": "Topic_坚持跑步",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "User--supports-->Topic_坚持跑步"
+            }
+          },
+          {
+            "id": "e_Topic_坚持跑步_causes_Outcome_保持身体健康_1778073144214",
+            "src": "Topic_坚持跑步",
+            "dst": "Outcome_保持身体健康",
+            "relation": "causes",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778073144213",
+              "requires_review": true,
+              "confidence": 0.8
+            }
+          },
+          {
+            "id": "e_Event_1778073144213_content_is_Outcome_保持身体健康_1778073144214",
+            "src": "Event_1778073144213",
+            "dst": "Outcome_保持身体健康",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "Topic_坚持跑步--causes-->Outcome_保持身体健康"
+            }
+          },
+          {
+            "id": "e_虽然每天坚持跑步很累，但这确实_is_a_保持身体健康最有效的方法_1778073144214",
+            "src": "虽然每天坚持跑步很累，但这确实",
+            "dst": "保持身体健康最有效的方法",
+            "relation": "is_a",
+            "weight": 0.85,
+            "attributes": {
+              "source": "rule_repair",
+              "src_surface": "虽然每天坚持跑步很累，但这确实",
+              "dst_surface": "保持身体健康最有效的方法",
+              "derived_from_event": "Event_1778073144213",
+              "requires_review": true
+            }
+          },
+          {
+            "id": "e_Event_1778073144213_object_is_保持身体健康最有效的方法_1778073144214",
+            "src": "Event_1778073144213",
+            "dst": "保持身体健康最有效的方法",
+            "relation": "object_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "虽然每天坚持跑步很累，但这确实--is_a-->保持身体健康最有效的方法"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778073144213",
+            "source_text": "虽然每天坚持跑步很累，但这确实是保持身体健康最有效的方法",
+            "intent_class": "assertion",
+            "summary": "用户认为坚持跑步是保持身体健康的有效方法",
+            "importance": 0.9
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "虽然每天坚持跑步很累，但这确实是保持身体健康最有效的方法",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778073153162"
+    },
+    {
+      "id": "working_1778072451942",
+      "createdAt": "2026-05-06T13:00:51.942696+00:00",
+      "updatedAt": "2026-05-06T13:01:02.264247+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778072438709",
+      "text": "苹果是红色的",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778072451930",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8700000000000001,
+            "attributes": {
+              "source_text": "苹果是红色的",
+              "intent_class": "assertion",
+              "summary": "苹果是红色的",
+              "importance": 0.8,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T13:00:51.930893+00:00"
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source"
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self"
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler"
+            }
+          },
+          {
+            "id": "Apple_Color_Is_>_Red",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "苹果",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "source": "general_assertion"
+            }
+          },
+          {
+            "id": "Color_红色",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "value": "红色",
+              "source": "rule_repair"
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778072451930_agent_is_User_1778072451931",
+            "src": "Event_1778072451930",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778072451930_action_is_Assert_Statement_1778072451931",
+            "src": "Event_1778072451930",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_User_believes_Apple_Color_Is_>_Red_1778072451931",
+            "src": "User",
+            "dst": "Apple_Color_Is_>_Red",
+            "relation": "believes",
+            "weight": 0.8,
+            "attributes": {
+              "derived_from_event": "Event_1778072451930",
+              "requires_review": true,
+              "confidence": 0.8
+            }
+          },
+          {
+            "id": "e_Event_1778072451930_content_is_Apple_Color_Is_>_Red_1778072451931",
+            "src": "Event_1778072451930",
+            "dst": "Apple_Color_Is_>_Red",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "User--believes-->Apple_Color_Is_>_Red"
+            }
+          },
+          {
+            "id": "e_苹果_color_is_Color_红色_1778072451931",
+            "src": "苹果",
+            "dst": "Color_红色",
+            "relation": "color_is",
+            "weight": 0.9,
+            "attributes": {
+              "value": "红色",
+              "source": "rule_repair",
+              "derived_from_event": "Event_1778072451930",
+              "requires_review": true
+            }
+          },
+          {
+            "id": "e_Event_1778072451930_content_is_Color_红色_1778072451932",
+            "src": "Event_1778072451930",
+            "dst": "Color_红色",
+            "relation": "content_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "苹果--color_is-->Color_红色"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778072451930",
+            "source_text": "苹果是红色的",
+            "intent_class": "assertion",
+            "summary": "苹果是红色的",
+            "importance": 0.8
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [],
+        "source_text": "苹果是红色的",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778072462263"
+    },
+    {
+      "id": "working_1778071551088",
+      "createdAt": "2026-05-06T12:45:51.088100+00:00",
+      "updatedAt": "2026-05-06T12:46:06.084918+00:00",
+      "source": "working_event_frame_llm",
+      "parser": "llm",
+      "model": "qwen2.5",
+      "run_id": "llmrun_1778071544483",
+      "text": "你的名字是Haru",
+      "delta": {
+        "candidate_nodes": [
+          {
+            "id": "Event_1778071551079",
+            "kind": "declarative",
+            "tau": "episodic",
+            "weight": 0.8700000000000001,
+            "attributes": {
+              "source_text": "你的名字是Haru",
+              "intent_class": "assertion",
+              "summary": "用户陈述自己的名字是Haru",
+              "importance": 0.8,
+              "parser": "llm_general:qwen2.5",
+              "createdAt": "2026-05-06T12:45:51.079297+00:00",
+              "is_self": false
+            }
+          },
+          {
+            "id": "User",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.75,
+            "attributes": {
+              "role": "teacher_or_stimulus_source",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Companion_Self",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "role": "system_self",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Assert_Statement",
+            "kind": "procedural",
+            "tau": "procedural",
+            "weight": 0.75,
+            "attributes": {
+              "handler": "Assert_Statement",
+              "intent_class": "assertion",
+              "description": "general intent handler",
+              "is_self": false
+            }
+          },
+          {
+            "id": "Name_Haru",
+            "kind": "declarative",
+            "tau": "semantic",
+            "weight": 0.8,
+            "attributes": {
+              "value": "Haru",
+              "source": "rule_repair",
+              "role": "name_value",
+              "is_self": false
+            }
+          }
+        ],
+        "candidate_edges": [
+          {
+            "id": "e_Event_1778071551079_agent_is_User_1778071551080",
+            "src": "Event_1778071551079",
+            "dst": "User",
+            "relation": "agent_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Event_1778071551079_action_is_Assert_Statement_1778071551080",
+            "src": "Event_1778071551079",
+            "dst": "Assert_Statement",
+            "relation": "action_is",
+            "weight": 0.8,
+            "attributes": {}
+          },
+          {
+            "id": "e_Companion_Self_name_is_Name_Haru_1778071551080",
+            "src": "Companion_Self",
+            "dst": "Name_Haru",
+            "relation": "name_is",
+            "weight": 0.95,
+            "attributes": {
+              "value": "Haru",
+              "source": "rule_repair",
+              "derived_from_event": "Event_1778071551079",
+              "requires_review": true
+            }
+          },
+          {
+            "id": "e_Event_1778071551079_name_is_Name_Haru_1778071551080",
+            "src": "Event_1778071551079",
+            "dst": "Name_Haru",
+            "relation": "name_is",
+            "weight": 0.75,
+            "attributes": {
+              "from_fact": "Companion_Self--name_is-->Name_Haru"
+            }
+          }
+        ],
+        "candidate_event_frames": [
+          {
+            "id": "Event_1778071551079",
+            "source_text": "你的名字是Haru",
+            "intent_class": "assertion",
+            "summary": "用户陈述自己的名字是Haru",
+            "importance": 0.8
+          }
+        ],
+        "uncertainties": [],
+        "canonicalization_notes": [
+          "Ignored LLM self-name misread: User --name_is--> Name_Haru; authoritative source is Companion_Self"
+        ],
+        "source_text": "你的名字是Haru",
+        "extractor": "llm_general_assertion:qwen2.5"
+      },
+      "status": "promoted",
+      "pending_id": "pending_1778071566083"
+    }
+  ]
+}

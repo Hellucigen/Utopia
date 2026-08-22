@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "node_labels": [
+    "declarative-semantic",
+    "declarative-episodic",
+    "procedural"
+  ],
+  "node_fields": [
+    "id",
+    "weight",
+    "activation",
+    "last_access_time",
+    "created_at",
+    "label",
+    "execution",
+    "attributes"
+  ],
+  "edge_fields": [
+    "src",
+    "dst",
+    "relation",
+    "last_access_time",
+    "created_at",
+    "weight",
+    "activation",
+    "attributes"
+  ],
+  "hyperparameters": {
+    "initial_match_activation": 1.2,
+    "match_decay": 0.35,
+    "spread_beta": 0.9,
+    "decay_lambda": 0.15,
+    "activation_threshold": 0.12,
+    "max_activation": 2.0,
+    "top_k": 6,
+    "result_limit": 6,
+    "action_threshold": 1.0,
+    "activation_floor": 0.0,
+    "realtime_interval_ms": 800,
+    "max_spread_steps": 8,
+    "natural_language_seed_id": "Natural_Language_Input_Processor"
+  }
+}

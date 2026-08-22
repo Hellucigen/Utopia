@@ -1,0 +1,31 @@
+{
+  "id": "2026-05-04T14_13_12.694461+00_00_snapshot",
+  "name": "2026-05-04T14_13_12.694461+00_00_snapshot",
+  "createdAt": "2026-05-04T14:13:12.694461+00:00",
+  "graph": {
+    "meta": {
+      "name": "Fascinator Knowledge Graph",
+      "version": "0.2",
+      "description": "Persistent instance graph only. Runtime activation is stored in runtime_state.json."
+    },
+    "nodes": [],
+    "edges": [],
+    "change_log": []
+  },
+  "runtime": {
+    "params": {
+      "lambda": 0.18,
+      "beta": 0.9,
+      "topK": 6,
+      "actionThreshold": 1.0,
+      "maxActivation": 2.0,
+      "relationRuntimeScale": 0.05
+    },
+    "activations": {},
+    "edge_runtime": {},
+    "top_k": [],
+    "current_focus": null,
+    "action_queue": [],
+    "logs": []
+  }
+}

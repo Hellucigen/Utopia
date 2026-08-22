@@ -1,0 +1,411 @@
+{
+  "nodes": [
+    {
+      "id": "Companion_Self",
+      "kind": "declarative",
+      "tau": "semantic",
+      "weight": 0.9,
+      "attributes": {
+        "role": "system_self",
+        "is_self": true,
+        "value": "Haru",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "User",
+      "kind": "declarative",
+      "tau": "semantic",
+      "weight": 0.75,
+      "attributes": {
+        "role": "teacher_or_stimulus_source",
+        "is_self": false,
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Illocution_Assertive",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.82,
+      "attributes": {
+        "value": "assertive / 断言类",
+        "prompt": "用户在陈述事实、教学知识、表达偏好/目标/身份/纠正信息；系统应写入候选图谱知识，但需审核。",
+        "illocution": true,
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Illocution_Directive",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.82,
+      "attributes": {
+        "value": "directive / 指令类",
+        "prompt": "用户在要求系统做某事，包括询问、命令、查询、解释、展示信息；系统应返回一个行动。",
+        "illocution": true,
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Illocution_Commissive",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.82,
+      "attributes": {
+        "value": "commissive / 承诺类",
+        "prompt": "用户或系统表达承诺、计划、将要做的事；通常写入目标/计划候选知识。",
+        "illocution": true,
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Illocution_Expressive",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.82,
+      "attributes": {
+        "value": "expressive / 表达类",
+        "prompt": "用户表达情绪、评价、满意/不满/疲惫等状态；低强度写入或候选化。",
+        "illocution": true,
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Illocution_Declarative",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.82,
+      "attributes": {
+        "value": "declarative / 宣告类",
+        "prompt": "用户通过话语改变系统状态或身份命名/授权/确认，如‘你的名字是Haru’。",
+        "illocution": true,
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Action_Write_Graph_Knowledge",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.88,
+      "attributes": {
+        "handler": "write_graph_knowledge_pending",
+        "description": "Parse content into Working + Pending knowledge before commit.",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Action_Answer_From_TopK",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.9,
+      "attributes": {
+        "handler": "answer_from_topk",
+        "description": "Answer using activated Top-k graph context and incident edges.",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_Lambda_Decay",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "lambda",
+        "value": 0.18,
+        "description": "节点保留/衰减参数。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_Beta_Spread",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "beta",
+        "value": 0.9,
+        "description": "扩散强度参数。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_TopK",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "topK",
+        "value": 6,
+        "description": "注意力 top-k 数量。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_ActionThreshold",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "actionThreshold",
+        "value": 1.0,
+        "description": "动作阈值。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_MaxActivation",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "maxActivation",
+        "value": 2.0,
+        "description": "最大激活。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_RelationRuntimeScale",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "relationRuntimeScale",
+        "value": 0.05,
+        "description": "边运行时激活尺度。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_SelfBaselineActivation",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "selfBaselineActivation",
+        "value": 0.18,
+        "description": "self 节点基线激活。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_IllocutionActivation",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "illocutionActivation",
+        "value": 1.2,
+        "description": "言外行为初始激活。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_TokenActivation",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "tokenActivation",
+        "value": 0.45,
+        "description": "token 匹配激活。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_EdgeTokenActivation",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "edgeTokenActivation",
+        "value": 0.35,
+        "description": "边 token 激活。",
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "id": "Hyperparam_NaturalInputSpreadSteps",
+      "kind": "procedural",
+      "tau": "procedural",
+      "weight": 0.65,
+      "attributes": {
+        "is_self": true,
+        "role": "runtime_hyperparameter",
+        "param_key": "naturalInputSpreadSteps",
+        "value": 4,
+        "description": "自然语言输入后扩散轮数。",
+        "preset_generation": "v06R99"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "src": "Illocution_Assertive",
+      "relation": "spreads_to",
+      "dst": "Action_Write_Graph_Knowledge",
+      "weight": 0.9,
+      "attributes": {
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "src": "Illocution_Declarative",
+      "relation": "spreads_to",
+      "dst": "Action_Write_Graph_Knowledge",
+      "weight": 0.92,
+      "attributes": {
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "src": "Illocution_Commissive",
+      "relation": "spreads_to",
+      "dst": "Action_Write_Graph_Knowledge",
+      "weight": 0.72,
+      "attributes": {
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "src": "Illocution_Directive",
+      "relation": "spreads_to",
+      "dst": "Action_Answer_From_TopK",
+      "weight": 0.88,
+      "attributes": {
+        "preset_generation": "v06R99"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_Lambda_Decay",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "lambda"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_Beta_Spread",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "beta"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_TopK",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "topK"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_ActionThreshold",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "actionThreshold"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_MaxActivation",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "maxActivation"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_RelationRuntimeScale",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "relationRuntimeScale"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_SelfBaselineActivation",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "selfBaselineActivation"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_IllocutionActivation",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "illocutionActivation"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_TokenActivation",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "tokenActivation"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_EdgeTokenActivation",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "edgeTokenActivation"
+      }
+    },
+    {
+      "src": "Companion_Self",
+      "relation": "has_hyperparameter",
+      "dst": "Hyperparam_NaturalInputSpreadSteps",
+      "weight": 0.55,
+      "attributes": {
+        "preset_generation": "v06R99",
+        "param_key": "naturalInputSpreadSteps"
+      }
+    }
+  ]
+}

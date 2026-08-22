@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 运行时数据(含 LLM 对话记录,仅存本地;种子图 core_seed_graph.json 除外)
+backend/data/knowledge_graph*
+backend/data/llm_runs.json
+backend/data/pending_writes.json
+backend/data/runtime*.json
+backend/data/*.backup*
+
+# 日志与临时文件
+*.log
+*.tmp

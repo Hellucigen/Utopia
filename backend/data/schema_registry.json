@@ -1,0 +1,292 @@
+{
+  "version": "0.6R.9.9",
+  "node_kinds": [
+    "declarative",
+    "procedural"
+  ],
+  "declarative_tau": [
+    "semantic",
+    "episodic"
+  ],
+  "procedural_tau": [
+    "procedural"
+  ],
+  "tau_tags": [
+    "semantic",
+    "episodic",
+    "procedural"
+  ],
+  "edge_relation_policy": "open_relation_names",
+  "relation_examples": [
+    "agent_is",
+    "action_is",
+    "patient_is",
+    "object_is",
+    "name_is",
+    "color_is",
+    "location_is",
+    "time_is",
+    "goal_is",
+    "causes",
+    "supports",
+    "inhibits",
+    "part_of",
+    "used_for",
+    "result_of",
+    "derived_from"
+  ],
+  "runtime_params": {
+    "lambda": 0.18,
+    "beta": 0.9,
+    "topK": 6,
+    "actionThreshold": 1.0,
+    "maxActivation": 2.0,
+    "relationRuntimeScale": 0.05,
+    "topKFilter": "all",
+    "selfBaselineActivation": 0.18,
+    "illocutionActivation": 1.2,
+    "tokenActivation": 0.45,
+    "edgeTokenActivation": 0.35,
+    "naturalInputSpreadSteps": 4
+  },
+  "loop_defaults": {
+    "mode": "manual",
+    "enabled": false,
+    "tick_interval_ms": 800,
+    "tick_count": 0,
+    "last_tick_at": null,
+    "auto_spread": true,
+    "auto_focus": true,
+    "auto_execute_actions": false,
+    "action_cooldown_ticks": 5
+  },
+  "llm_ingest": {
+    "provider": "ollama",
+    "default_model": "qwen2.5",
+    "temperature": 0.0,
+    "timeout_seconds": 90,
+    "fallback_to_rule": true
+  },
+  "intent_classes": [
+    "assertion",
+    "command",
+    "question",
+    "feedback",
+    "low_value"
+  ],
+  "assertion_subtypes": [
+    "self_name",
+    "user_identity",
+    "relationship",
+    "goal",
+    "user_interest",
+    "knowledge_fact",
+    "knowledge_is_a",
+    "knowledge_has",
+    "generic"
+  ],
+  "llm_fact_policy": {
+    "deterministic_subtypes_ignore_llm_useful_facts": [
+      "self_name",
+      "user_identity",
+      "relationship",
+      "goal",
+      "knowledge_is_a",
+      "knowledge_has",
+      "user_interest"
+    ],
+    "open_subtypes_allow_llm_useful_facts": [
+      "knowledge_fact",
+      "generic"
+    ]
+  },
+  "top_k_filters": [
+    "all",
+    "declarative",
+    "procedural",
+    "semantic",
+    "episodic"
+  ],
+  "recall": {
+    "max_depth": 3,
+    "default_depth": 1
+  },
+  "interest_memory": {
+    "patterns": [
+      "我对X感兴趣",
+      "我喜欢X",
+      "I am interested in X",
+      "I like X"
+    ],
+    "positive_relation": "interested_in",
+    "negative_relation": "not_interested_in"
+  },
+  "general_assertion_frame": {
+    "intent_classes": [
+      "assertion",
+      "question",
+      "command",
+      "feedback",
+      "low_value"
+    ],
+    "fact_edge_format": "src --relation--> dst",
+    "node_model": "kind=declarative/procedural, tau=semantic/episodic/procedural",
+    "backend_role": "canonicalize nodes/relations/noise/evidence; no subtype explosion"
+  },
+  "json_graph_language": {
+    "supported_shapes": [
+      {
+        "nodes": [],
+        "edges": []
+      },
+      {
+        "candidate_nodes": [],
+        "candidate_edges": []
+      },
+      {
+        "facts": [
+          {
+            "src": "User",
+            "relation": "interested_in",
+            "dst": "Topic_X"
+          }
+        ]
+      }
+    ],
+    "endpoint": "POST /graph/import-json",
+    "modes": [
+      "pending",
+      "commit"
+    ]
+  },
+  "instruction_layer": {
+    "current_scope": "directive inquiry only",
+    "answer_endpoint": "POST /qa/answer",
+    "pipeline": "question -> infer seed nodes -> activation injection -> spread -> top_k context -> LLM answer",
+    "context_source": "query-activated top_k nodes and incident edges",
+    "procedural_node": "Answer_Directive_Inquiry_From_TopK"
+  },
+  "answer_style": {
+    "default": "short first-person companion answer",
+    "uses_node_value_display": true,
+    "debug_info": "kept in UI context JSON, not final answer"
+  },
+  "node_rename": {
+    "endpoint": "POST /nodes/{node_id}/rename",
+    "updates_incident_edges": true
+  },
+  "graph_governance": {
+    "endpoints": [
+      "POST /nodes/merge",
+      "GET /governance/health",
+      "POST /governance/normalize-relations",
+      "POST /governance/command"
+    ],
+    "supported_commands": [
+      "merge_nodes",
+      "rename_node",
+      "delete_node",
+      "recall_node",
+      "list_relation",
+      "health_check",
+      "normalize_relations"
+    ]
+  },
+  "intent_router": {
+    "description": "LLM receives all Intent_* nodes and chooses one to activate along with Action_* and ResponseMode_* nodes.",
+    "endpoints": [
+      "GET /intent/options",
+      "POST /intent/route"
+    ],
+    "repair_endpoint": "POST /governance/repair-v091",
+    "hotfix": "adds missing intent_option_graph and router helper definitions"
+  },
+  "natural_input_pipeline": {
+    "endpoint": "POST /natural/process",
+    "description": "input -> selected Intent_* activation -> graph-resolved Action_* -> graph-resolved ResponseMode_* -> execution",
+    "important": "Actions are resolved from graph edges, not directly hardcoded.",
+    "actions": [
+      "Action_Write_Working_Memory",
+      "Action_Answer_From_TopK",
+      "Action_Graph_Governance",
+      "Action_Show_Debug_Context",
+      "Action_Ignore_Low_Value"
+    ]
+  },
+  "canonicalization_fix": {
+    "self_name": "drop LLM User--name_is facts when rule_repair identifies Companion_Self--name_is"
+  },
+  "hotfix": "fix frontend dead buttons from duplicate selectedEdgeId declaration; robust graph nodes/edges shape",
+  "question_fix": {
+    "name_question": "你的名字是什么 is question; never creates Name_什么"
+  },
+  "prompt_update": {
+    "extractor": "question inputs must not write facts; no Name_什么; assertions only produce graph facts",
+    "answer": "response mode aware, first-person companion style"
+  },
+  "ui_update": {
+    "natural_input": "separate reply box, working box, governance box, debug json"
+  },
+  "route_fix": {
+    "problem": "if graph seed edges are missing, selected Intent_Directive_Inquiry fell back to Action_Write_Working_Memory",
+    "fix": "fallback action now respects selected intent; question routes to Action_Answer_From_TopK"
+  },
+  "stabilization": {
+    "query_activation": "pronoun seeds + relation edge activation",
+    "deterministic_facts": "苹果是红色的 -> Apple --color_is--> Color_红色",
+    "answer": "direct graph hint for self-name questions"
+  },
+  "illocution_pipeline": {
+    "description": "Five illocution nodes, token/node/edge activation, spreading to action nodes.",
+    "five_nodes": [
+      "Illocution_Assertive",
+      "Illocution_Directive",
+      "Illocution_Commissive",
+      "Illocution_Expressive",
+      "Illocution_Declarative"
+    ],
+    "review": "Write action automatically creates Working + Pending; commit still requires review.",
+    "self": "attributes.is_self=true keeps baseline activation."
+  },
+  "activation_formula_pipeline": {
+    "natural_input": "illocution activation + token/edge activation -> spread_once repeated naturalInputSpreadSteps -> update_attention/action selection",
+    "formula_params": [
+      "lambda",
+      "beta",
+      "relationRuntimeScale",
+      "maxActivation",
+      "topK",
+      "actionThreshold",
+      "selfBaselineActivation",
+      "illocutionActivation",
+      "tokenActivation",
+      "edgeTokenActivation",
+      "naturalInputSpreadSteps"
+    ],
+    "hyperparameter_nodes": "Hyperparam_* nodes are self-related nodes and synchronized from runtime params."
+  },
+  "minimal_preset_policy": {
+    "keep_only": [
+      "Companion_Self",
+      "User",
+      "Illocution_Assertive",
+      "Illocution_Directive",
+      "Illocution_Commissive",
+      "Illocution_Expressive",
+      "Illocution_Declarative",
+      "Action_Answer_From_TopK",
+      "Action_Write_Graph_Knowledge",
+      "Hyperparam_*"
+    ],
+    "removed_from_presets": [
+      "Illocution_Classifier",
+      "Action_Graph_Command",
+      "Action_Ignore_Or_Acknowledge",
+      "Graph governance preset nodes",
+      "Intent_*",
+      "ResponseMode_*",
+      "Parse_*",
+      "Answer_*"
+    ]
+  }
+}
