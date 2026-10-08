@@ -1,0 +1,1124 @@
+{
+    "nodes": [
+        {
+            "id": "Concept_Unknown_90241f98_0",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Me",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236261,
+                "last_accessed": 1768236261
+            }
+        },
+        {
+            "id": "Concept_Unknown_d3535b6f_1",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Haru",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236333,
+                "last_accessed": 1768236333
+            }
+        },
+        {
+            "id": "Concept_Unknown_84d6eb53_2",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Name",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236346,
+                "last_accessed": 1768236346
+            }
+        },
+        {
+            "id": "Concept_Unknown_ee383d0e_3",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "What",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236471,
+                "last_accessed": 1768236471
+            }
+        },
+        {
+            "id": "Concept_Unknown_df8d0280_4",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "AGI",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768236489,
+                "last_accessed": 1768236489
+            }
+        },
+        {
+            "id": "Concept_Unknown_4c42c21d_5",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Ask",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768237000,
+                "last_accessed": 1768237000
+            }
+        },
+        {
+            "id": "Concept_Unknown_804f374b_6",
+            "type": "Action",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Answer",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768238751,
+                "last_accessed": 1768238751,
+                "code": "answer.py"
+            }
+        },
+        {
+            "id": "Concept_Unknown_d8767987_7",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "You",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768239493,
+                "last_accessed": 1768239493
+            }
+        },
+        {
+            "id": "Concept_Unknown_49e2d0a1_8",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Your",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768239504,
+                "last_accessed": 1768239504
+            }
+        },
+        {
+            "id": "Concept_Unknown_cbc8f819_9",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Unknown_Knowledge",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768633426,
+                "last_accessed": 1768633426
+            }
+        },
+        {
+            "id": "Concept_Unknown_be4a11f7_10",
+            "type": "Action",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "CreateUnknownNode",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1768633462,
+                "last_accessed": 1768633462
+            }
+        },
+        {
+            "id": "Concept_Unknown_4c709ba2_11",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Byebye",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769338201,
+                "last_accessed": 1769338201
+            }
+        },
+        {
+            "id": "Concept_Unknown_7a22848f_12",
+            "type": "Action",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "SearchFormWiki",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1769340808,
+                "last_accessed": 1769340808,
+                "code": "wiki_enricher.py"
+            }
+        },
+        {
+            "id": "Concept_Unknown_6873e71d_13",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Hi",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769341526,
+                "last_accessed": 1769341526
+            }
+        },
+        {
+            "id": "Concept_Unknown_297f919a_14",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Apple",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343173,
+                "last_accessed": 1769343173
+            }
+        },
+        {
+            "id": "Concept_Unknown_00cb9fd0_15",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Fruit",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_44016d4b_16",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Appletree",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_00ad70d9_17",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Centralasia",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_9a19f6e6_18",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Malus_sieversii",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_3937c400_19",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Eurasia",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_9280d9e7_20",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "North_america",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_4f7a5088_21",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Mythology",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_f7275792_22",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Religion",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_f53b2ac9_23",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Domestic_apple",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_74059086_24",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Tree",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769343244,
+                "last_accessed": 1769343244
+            }
+        },
+        {
+            "id": "Concept_Unknown_cf0c4190_25",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Search",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769692199,
+                "last_accessed": 1769692199
+            }
+        },
+        {
+            "id": "Concept_Unknown_7672a428_26",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Transitive_Verb",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1769694640,
+                "last_accessed": 1769694640
+            }
+        },
+        {
+            "id": "Concept_Unknown_8db20b19_27",
+            "type": "Concept",
+            "base_weight": 1.0,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Object",
+                "weight": 1.0,
+                "memory_type": "semantic",
+                "created_at": 1769694993,
+                "last_accessed": 1769694993
+            }
+        },
+        {
+            "id": "Concept_Unknown_a5a99127_28",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Banana",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697409,
+                "last_accessed": 1769697409
+            }
+        },
+        {
+            "id": "Concept_Unknown_277e06a8_29",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Berry",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_124eb6e8_30",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Musa",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_5f167eb0_31",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Cooking_banana",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_5fb21eb0_32",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Plantain",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_a7b7b8da_33",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Peel",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_12ac117d_34",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Cluster",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_0052d694_35",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Cultivated_banana",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_d9a23920_36",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Musa_acuminata",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_596964c2_37",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Musa_balbisiana",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_328c5acd_38",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Hybrid",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1769697509,
+                "last_accessed": 1769697509
+            }
+        },
+        {
+            "id": "Concept_Unknown_66d62412_39",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Hello",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1770804216,
+                "last_accessed": 1770804216
+            }
+        },
+        {
+            "id": "Concept_Unknown_c51d3b65_40",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Salutation",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1770804284,
+                "last_accessed": 1770804284
+            }
+        },
+        {
+            "id": "Concept_Unknown_13ae374f_41",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Greeting",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1770804284,
+                "last_accessed": 1770804284
+            }
+        },
+        {
+            "id": "Concept_Unknown_9916a18c_42",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "1826",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1770804284,
+                "last_accessed": 1770804284
+            }
+        },
+        {
+            "id": "Concept_Unknown_c62feb9c_43",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "User",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1770808190,
+                "last_accessed": 1770808190
+            }
+        },
+        {
+            "id": "Concept_Unknown_530fd19e_44",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Water",
+                "created_at": 1771085179,
+                "last_accessed": 1771085179,
+                "source": "llm_triple",
+                "enriched_from_wiki": true,
+                "wiki_summary_length": 39,
+                "weight": 0.5,
+                "memory_type": "semantic"
+            }
+        },
+        {
+            "id": "Concept_Unknown_513e5741_45",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Compound",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_bdee0d87_46",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "H2O",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_3884559d_47",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Liquid",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_547087b9_48",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Solid",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_e5448ef7_49",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Gas",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_10ca69a0_50",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Life",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_e6fe8d04_51",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Earths_Surface",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_fe381187_52",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Cooking",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_c008a618_53",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Cleaning",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771085192,
+                "last_accessed": 1771085192,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_fe9770e3_54",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "System",
+                "created_at": 1771825841,
+                "last_accessed": 1771825841,
+                "source": "llm_triple",
+                "enriched_from_wiki": true,
+                "wiki_summary_length": 40,
+                "weight": 0.5,
+                "memory_type": "semantic"
+            }
+        },
+        {
+            "id": "Concept_Unknown_44049252_55",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Placeholder",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771825844,
+                "last_accessed": 1771825844,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_15ff9111_56",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Wikipedia",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771825844,
+                "last_accessed": 1771825844,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_8282a819_57",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Systems_name",
+                "created_at": 1771825860,
+                "last_accessed": 1771825860,
+                "source": "llm_triple",
+                "enriched_from_wiki": true,
+                "wiki_summary_length": 47,
+                "weight": 0.5,
+                "memory_type": "semantic"
+            }
+        },
+        {
+            "id": "Concept_Unknown_7594c6ef_58",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "Placeholder_Wikipedia_summary",
+                "weight": 0.5,
+                "memory_type": "semantic",
+                "created_at": 1771825864,
+                "last_accessed": 1771825864,
+                "source": "wiki_enrichment"
+            }
+        },
+        {
+            "id": "Concept_Unknown_77ba18be_59",
+            "type": "Concept",
+            "base_weight": 0.5,
+            "memory_type": "semantic",
+            "attributes": {
+                "name": "System_name",
+                "created_at": 1771826059,
+                "last_accessed": 1771826059,
+                "source": "llm_triple",
+                "enriched_from_wiki": true,
+                "wiki_summary_length": 45,
+                "weight": 0.5,
+                "memory_type": "semantic"
+            }
+        }
+    ],
+    "edges": [
+        {
+            "src": "Concept_Unknown_90241f98_0",
+            "dst": "Concept_Unknown_df8d0280_4",
+            "relation": "IDENTITY_IS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_90241f98_0",
+            "dst": "Concept_Unknown_d3535b6f_1",
+            "relation": "NAME_IS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_ee383d0e_3",
+            "dst": "Concept_Unknown_4c42c21d_5",
+            "relation": "USED_TO",
+            "weight": 0.5
+        },
+        {
+            "src": "Concept_Unknown_84d6eb53_2",
+            "dst": "Concept_Unknown_d3535b6f_1",
+            "relation": "FOR_ME",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_4c42c21d_5",
+            "dst": "Concept_Unknown_804f374b_6",
+            "relation": "SHOULD",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_d8767987_7",
+            "dst": "Concept_Unknown_90241f98_0",
+            "relation": "FORMS_DEICTIC_PAIR_WITH",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_49e2d0a1_8",
+            "dst": "Concept_Unknown_d8767987_7",
+            "relation": "ADJECTIVAL_POSSESSIVE_FORM_FOR",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_cbc8f819_9",
+            "dst": "Concept_Unknown_be4a11f7_10",
+            "relation": "THEN",
+            "weight": 1.0
+        },
+        {
+            "src": "Concept_Unknown_be4a11f7_10",
+            "dst": "Concept_Unknown_7a22848f_12",
+            "relation": "THEN_SHOULD",
+            "weight": 1.0
+        },
+        {
+            "src": "Concept_Unknown_297f919a_14",
+            "dst": "Concept_Unknown_00cb9fd0_15",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_297f919a_14",
+            "dst": "Concept_Unknown_3937c400_19",
+            "relation": "CULTIVATED_IN",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_297f919a_14",
+            "dst": "Concept_Unknown_9280d9e7_20",
+            "relation": "INTRODUCED_TO",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_297f919a_14",
+            "dst": "Concept_Unknown_4f7a5088_21",
+            "relation": "CULTURAL_SIGNIFICANCE",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_297f919a_14",
+            "dst": "Concept_Unknown_f7275792_22",
+            "relation": "CULTURAL_SIGNIFICANCE",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_44016d4b_16",
+            "dst": "Concept_Unknown_00ad70d9_17",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_44016d4b_16",
+            "dst": "Concept_Unknown_9a19f6e6_18",
+            "relation": "ANCESTOR_OF",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_f53b2ac9_23",
+            "dst": "Concept_Unknown_74059086_24",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_cf0c4190_25",
+            "dst": "Concept_Unknown_7672a428_26",
+            "relation": "IS",
+            "weight": 0.5
+        },
+        {
+            "src": "Concept_Unknown_cf0c4190_25",
+            "dst": "Concept_Unknown_7a22848f_12",
+            "relation": "CAN",
+            "weight": 0.9
+        },
+        {
+            "src": "Concept_Unknown_a5a99127_28",
+            "dst": "Concept_Unknown_00cb9fd0_15",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_a5a99127_28",
+            "dst": "Concept_Unknown_277e06a8_29",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_a5a99127_28",
+            "dst": "Concept_Unknown_124eb6e8_30",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_a5a99127_28",
+            "dst": "Concept_Unknown_a7b7b8da_33",
+            "relation": "HAS",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_a5a99127_28",
+            "dst": "Concept_Unknown_12ac117d_34",
+            "relation": "GROWS_IN",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_5f167eb0_31",
+            "dst": "Concept_Unknown_5fb21eb0_32",
+            "relation": "IS_CALLED",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_0052d694_35",
+            "dst": "Concept_Unknown_d9a23920_36",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_0052d694_35",
+            "dst": "Concept_Unknown_596964c2_37",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_0052d694_35",
+            "dst": "Concept_Unknown_328c5acd_38",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_66d62412_39",
+            "dst": "Concept_Unknown_c51d3b65_40",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_66d62412_39",
+            "dst": "Concept_Unknown_13ae374f_41",
+            "relation": "IS_A",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_66d62412_39",
+            "dst": "Concept_Unknown_9916a18c_42",
+            "relation": "ORIGINATES_FROM",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_c62feb9c_43",
+            "dst": "Concept_Unknown_297f919a_14",
+            "relation": "EATS",
+            "weight": 0.6
+        },
+        {
+            "src": "Concept_Unknown_c62feb9c_43",
+            "dst": "Concept_Unknown_530fd19e_44",
+            "relation": "REFERS_TO",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_c62feb9c_43",
+            "dst": "Concept_Unknown_8282a819_57",
+            "relation": "ASKS_ABOUT",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_c62feb9c_43",
+            "dst": "Concept_Unknown_77ba18be_59",
+            "relation": "ASKS_ABOUT",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_513e5741_45",
+            "relation": "IS_A",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_bdee0d87_46",
+            "relation": "HAS_FORMULA",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_3884559d_47",
+            "relation": "EXISTS_AS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_547087b9_48",
+            "relation": "EXISTS_AS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_e5448ef7_49",
+            "relation": "EXISTS_AS",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_10ca69a0_50",
+            "relation": "NECESSARY_FOR",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_e6fe8d04_51",
+            "relation": "MAKES_UP",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_fe381187_52",
+            "relation": "USED_IN",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_530fd19e_44",
+            "dst": "Concept_Unknown_c008a618_53",
+            "relation": "USED_IN",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_fe9770e3_54",
+            "dst": "Concept_Unknown_44049252_55",
+            "relation": "HAS_TYPE",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_fe9770e3_54",
+            "dst": "Concept_Unknown_15ff9111_56",
+            "relation": "SUMMARY_FROM",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_fe9770e3_54",
+            "dst": "Concept_Unknown_84d6eb53_2",
+            "relation": "ASKS_ABOUT",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_fe9770e3_54",
+            "dst": "Concept_Unknown_84d6eb53_2",
+            "relation": "REFERS_TO",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_fe9770e3_54",
+            "dst": "Concept_Unknown_8282a819_57",
+            "relation": "HAS_NAME",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_8282a819_57",
+            "dst": "Concept_Unknown_7594c6ef_58",
+            "relation": "IS_TYPE_OF",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_77ba18be_59",
+            "dst": "Concept_Unknown_44049252_55",
+            "relation": "IS_A",
+            "weight": 0.7
+        },
+        {
+            "src": "Concept_Unknown_77ba18be_59",
+            "dst": "Concept_Unknown_15ff9111_56",
+            "relation": "SUMMARY_OF",
+            "weight": 0.7
+        }
+    ]
+}
